@@ -1,0 +1,20 @@
+replicaCount: 3
+image:
+  repository: myapp/image
+  tag: stable
+  pullPolicy: Always
+service:
+  type: ClusterIP
+  port: 80
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "500m"
+  limits: 
+    memory: "256Mi"
+    cpu: "1000m"
+lifecycle:
+  preStartCommand: "echo 'Initializing container...'"
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 2
